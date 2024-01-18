@@ -23,7 +23,10 @@ public class DatabaseRequest implements Runnable {
     }
 
     private void consumeValue(String value) {
-        value.length();
+        if (value.length() >= 100) {
+            // this will never happen
+            System.out.println(value);
+        }
     }
 
     private static BasicDataSource ds = new BasicDataSource();

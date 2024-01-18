@@ -6,7 +6,7 @@ import java.util.List;
 public class BlockingIOWithVirtualThread {
 
     public static void main(String[] args) throws InterruptedException {
-        List<Integer> digits = List.of(5, 10, 15);
+        List<Integer> digits = List.of(3, 4, 5);
 
         for (Integer digit : digits) {
             long requestCount = ((long) Math.pow(10, digit));
