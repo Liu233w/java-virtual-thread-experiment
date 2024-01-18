@@ -38,5 +38,6 @@ public class DatabaseRequest implements Runnable {
         ds.setMinIdle(5);
         ds.setMaxIdle(10);
         ds.setMaxOpenPreparedStatements(0);
+        ds.setCacheState(false);
     }
 }

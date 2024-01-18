@@ -1,7 +1,7 @@
 package com.shuminliu.experiment.io_test;
 
 import java.util.List;
-import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.Executors;
 
 public class BlockingIOWithOSThread {
     public static void main(String[] args) throws InterruptedException {
@@ -12,7 +12,7 @@ public class BlockingIOWithOSThread {
             long requestCount = ((long) Math.pow(10, digit));
             System.out.println("Request count: " + requestCount);
 
-            BenchmarkOnExecutor.benchmark(ForkJoinPool.commonPool(), new DatabaseRequest(), requestCount);
+            BenchmarkOnExecutor.benchmark(Executors.newFixedThreadPool(200), new DatabaseRequest(), requestCount);
         }
     }
 }
