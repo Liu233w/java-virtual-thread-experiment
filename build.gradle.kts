@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("me.champeau.jmh") version "0.7.2"
 }
 
 group = "org.example"
@@ -21,19 +22,19 @@ dependencies {
 
     implementation("org.postgresql:postgresql:42.5.1")
     implementation("org.apache.commons:commons-dbcp2:2.9.0")
+
+    implementation("org.openjdk.jmh:jmh-core:1.33")
+    implementation("org.openjdk.jmh:jmh-generator-annprocess:1.33")
 }
 
 tasks.withType<JavaCompile> {
-//    options.compilerArgs.add("--enable-preview")
 }
 
 tasks.test {
     useJUnitPlatform()
-//    jvmArgs("--enable-preview")
 }
 
 tasks.withType<JavaExec> {
-//    jvmArgs("--enable-preview")
 }
 
 java {
