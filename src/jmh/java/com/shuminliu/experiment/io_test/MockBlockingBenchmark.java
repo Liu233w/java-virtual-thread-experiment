@@ -1,10 +1,6 @@
 package com.shuminliu.experiment.io_test;
 
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.runner.Runner;
-import org.openjdk.jmh.runner.RunnerException;
-import org.openjdk.jmh.runner.options.Options;
-import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import java.util.concurrent.Executors;
 
@@ -14,20 +10,15 @@ public class MockBlockingBenchmark {
 
     @Benchmark
     public void testBlockingSleepWithOSThread() throws InterruptedException {
-        MockBlockingRequest.runOnExecutor(Executors.newFixedThreadPool(N_THREADS), COUNT);
+        try (var executor = Executors.newFixedThreadPool(N_THREADS)) {
+            MockBlockingRequest.runOnExecutor(executor, COUNT);
+        }
     }
 
     @Benchmark
     public void testBlockingSleepWithVirtualThread() throws InterruptedException {
-        MockBlockingRequest.runOnExecutor(Executors.newVirtualThreadPerTaskExecutor(), COUNT);
-    }
-
-    public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-            .include(MockBlockingBenchmark.class.getSimpleName())
-            .forks(1)
-            .build();
-
-        new Runner(opt).run();
+        try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            MockBlockingRequest.runOnExecutor(executor, COUNT);
+        }
     }
 }

@@ -3,6 +3,11 @@ plugins {
     id("me.champeau.jmh") version "0.7.2"
 }
 
+jmh {
+    iterations = 3
+    warmupIterations = 1
+}
+
 group = "org.example"
 version = "1.0-SNAPSHOT"
 

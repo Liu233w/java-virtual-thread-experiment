@@ -8,17 +8,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.concurrent.ExecutorService;
+import java.util.function.Consumer;
 
 public class DatabaseRequest implements Runnable {
-    private final Blackhole blackhole;
+    private final Consumer<Object> consumer;
 
-    public DatabaseRequest(Blackhole blackhole) {
-        this.blackhole = blackhole;
+    public DatabaseRequest(Consumer<Object> consumer) {
+        this.consumer = consumer;
     }
 
-    public static void runOnExecutor(ExecutorService threadPool, long count, Blackhole blackhole) throws InterruptedException {
+    public static void runOnExecutor(ExecutorService threadPool, long count, Consumer<Object> consumer) throws InterruptedException {
         for (int i = 0; i < count; i++) {
-            threadPool.submit(new DatabaseRequest(blackhole));
+            threadPool.submit(new DatabaseRequest(consumer));
         }
 
         threadPool.shutdown();
@@ -32,7 +33,7 @@ public class DatabaseRequest implements Runnable {
              ResultSet rs = stmt.executeQuery("SELECT 1")) {
 
             while (rs.next()) {
-                blackhole.consume(rs.getInt(1));
+                consumer.accept(rs.getInt(1));
             }
         } catch (SQLException e) {
             e.printStackTrace();
