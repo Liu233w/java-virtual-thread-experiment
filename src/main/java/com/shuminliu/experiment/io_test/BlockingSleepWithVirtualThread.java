@@ -4,6 +4,6 @@ import java.util.concurrent.Executors;
 
 public class BlockingSleepWithVirtualThread {
     public static void main(String[] args) throws InterruptedException {
-        BenchmarkOnExecutor.benchmark(Executors.newVirtualThreadPerTaskExecutor(), new AnyIORequest(), 100);
+        BenchmarkOnExecutor.benchmark(Executors.newVirtualThreadPerTaskExecutor(), new MockBlockingRequest(), 1000);
     }
 }

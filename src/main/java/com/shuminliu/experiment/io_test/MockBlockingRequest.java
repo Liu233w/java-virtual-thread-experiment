@@ -1,6 +1,6 @@
 package com.shuminliu.experiment.io_test;
 
-public class AnyIORequest implements Runnable {
+public class MockBlockingRequest implements Runnable {
     @Override
     public void run() {
         try {
