@@ -6,6 +6,10 @@ plugins {
 jmh {
     iterations = 3
     warmupIterations = 1
+    threads = 1
+    warmup = "1s"
+
+    includes = listOf("MockBlockingBenchmark")
 }
 
 group = "org.example"
@@ -30,6 +34,8 @@ dependencies {
 
     implementation("org.openjdk.jmh:jmh-core:1.33")
     implementation("org.openjdk.jmh:jmh-generator-annprocess:1.33")
+
+    implementation("io.projectreactor:reactor-core:3.4.10")
 }
 
 tasks.withType<JavaCompile> {

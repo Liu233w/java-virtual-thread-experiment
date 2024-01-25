@@ -21,4 +21,9 @@ public class MockBlockingBenchmark {
             MockBlockingRequest.runOnExecutor(executor, COUNT);
         }
     }
+
+    @Benchmark
+    public void testSleepingWithReactor() throws InterruptedException {
+        ReactorMockBlockingRequest.run(COUNT);
+    }
 }
