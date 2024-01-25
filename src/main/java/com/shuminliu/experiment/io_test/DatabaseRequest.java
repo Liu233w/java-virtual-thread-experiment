@@ -46,9 +46,9 @@ public class DatabaseRequest implements Runnable {
         ds.setUrl("jdbc:postgresql://localhost:5432/postgres");
         ds.setUsername("postgres");
         ds.setPassword("postgres");
-        ds.setMinIdle(5);
-        ds.setMaxIdle(10);
-        ds.setMaxOpenPreparedStatements(0);
-        ds.setCacheState(false);
+    }
+
+    public static void main(String[] args) {
+        new DatabaseRequest(System.out::println).run();
     }
 }

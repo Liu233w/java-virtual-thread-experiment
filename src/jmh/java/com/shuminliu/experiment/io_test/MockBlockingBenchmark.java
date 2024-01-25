@@ -9,21 +9,21 @@ public class MockBlockingBenchmark {
     public static final int N_THREADS = 200;
 
     @Benchmark
-    public void testBlockingSleepWithOSThread() throws InterruptedException {
+    public void withOSThread() throws InterruptedException {
         try (var executor = Executors.newFixedThreadPool(N_THREADS)) {
             MockBlockingRequest.runOnExecutor(executor, COUNT);
         }
     }
 
     @Benchmark
-    public void testBlockingSleepWithVirtualThread() throws InterruptedException {
+    public void withVirtualThread() throws InterruptedException {
         try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
             MockBlockingRequest.runOnExecutor(executor, COUNT);
         }
     }
 
     @Benchmark
-    public void testSleepingWithReactor() throws InterruptedException {
+    public void withReactor() throws InterruptedException {
         ReactorMockBlockingRequest.run(COUNT);
     }
 }

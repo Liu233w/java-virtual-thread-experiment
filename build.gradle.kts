@@ -7,9 +7,6 @@ jmh {
     iterations = 3
     warmupIterations = 1
     threads = 1
-    warmup = "1s"
-
-    includes = listOf("MockBlockingBenchmark")
 }
 
 group = "org.example"
@@ -36,6 +33,10 @@ dependencies {
     implementation("org.openjdk.jmh:jmh-generator-annprocess:1.33")
 
     implementation("io.projectreactor:reactor-core:3.4.10")
+
+    implementation("io.r2dbc:r2dbc-spi:1.0.0.RELEASE")
+    implementation("io.r2dbc:r2dbc-pool:1.0.1.RELEASE")
+    implementation("org.postgresql:r2dbc-postgresql:1.0.4.RELEASE")
 }
 
 tasks.withType<JavaCompile> {

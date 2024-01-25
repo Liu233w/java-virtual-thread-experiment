@@ -1,5 +1,4 @@
-Benchmark                                                     Mode  Cnt   Score    Error  Units
-DatabaseRequestBenchmark.testBlockingSleepWithOSThread       thrpt   15  20.832 ±  0.150  ops/s
-DatabaseRequestBenchmark.testBlockingSleepWithVirtualThread  thrpt   15  28.008 ±  0.747  ops/s
-MockBlockingBenchmark.testBlockingSleepWithOSThread          thrpt   15   0.200 ±  0.001  ops/s
-MockBlockingBenchmark.testBlockingSleepWithVirtualThread     thrpt   15   0.999 ±  0.001  ops/s
+Benchmark                                    Mode  Cnt   Score   Error  Units
+DatabaseRequestBenchmark.withOSThread       thrpt   15  21.215 ± 2.957  ops/s
+DatabaseRequestBenchmark.withReactor        thrpt   15  59.664 ± 1.068  ops/s
+DatabaseRequestBenchmark.withVirtualThread  thrpt   15  26.085 ± 1.265  ops/s
