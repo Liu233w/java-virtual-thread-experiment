@@ -1,7 +1,6 @@
 package com.shuminliu.experiment.io_test;
 
-import org.apache.commons.dbcp2.BasicDataSource;
-import org.openjdk.jmh.infra.Blackhole;
+import com.zaxxer.hikari.HikariDataSource;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -40,10 +39,10 @@ public class DatabaseRequest implements Runnable {
         }
     }
 
-    private static BasicDataSource ds = new BasicDataSource();
+    private static HikariDataSource ds = new HikariDataSource();
 
     static {
-        ds.setUrl("jdbc:postgresql://localhost:5432/postgres");
+        ds.setJdbcUrl("jdbc:postgresql://localhost:5432/postgres");
         ds.setUsername("postgres");
         ds.setPassword("postgres");
     }
