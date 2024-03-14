@@ -10,10 +10,10 @@ public class ReactorMockBlockingRequest {
 
     public static void run(int count) throws InterruptedException {
         Flux.range(1, count)
-            .publishOn(Schedulers.boundedElastic())
-            .flatMap(i ->
-                Mono.just(i)
-                    .delayElement(Duration.ofSeconds(1))
+            .publishOn(Schedulers.parallel())
+            .flatMap(
+                i -> Mono.just(i).delayElement(Duration.ofSeconds(1)),
+                Integer.MAX_VALUE
             )
             .blockLast();
     }

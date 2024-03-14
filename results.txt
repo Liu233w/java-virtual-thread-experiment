@@ -2,6 +2,6 @@ Benchmark                                    Mode  Cnt   Score    Error  Units
 DatabaseRequestBenchmark.withOSThread       thrpt   15  30.437 ±  0.269  ops/s
 DatabaseRequestBenchmark.withReactor        thrpt   15  61.004 ±  0.422  ops/s
 DatabaseRequestBenchmark.withVirtualThread  thrpt   15  52.918 ±  0.398  ops/s
-MockBlockingBenchmark.withOSThread          thrpt   15   0.200 ±  0.001  ops/s
-MockBlockingBenchmark.withReactor           thrpt   15   0.250 ±  0.001  ops/s
-MockBlockingBenchmark.withVirtualThread     thrpt   15   0.998 ±  0.001  ops/s
+MockBlockingBenchmark.withOSThread       thrpt   15  0.200 ±  0.001  ops/s
+MockBlockingBenchmark.withReactor        thrpt   15  0.999 ±  0.001  ops/s
+MockBlockingBenchmark.withVirtualThread  thrpt   15  0.999 ±  0.001  ops/s
