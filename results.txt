@@ -1,12 +1,9 @@
-Benchmark                                    Mode  Cnt   Score    Error  Units
-DatabaseRequestBenchmark.withOSThread       thrpt   15  30.437 ±  0.269  ops/s
-DatabaseRequestBenchmark.withReactor        thrpt   15  61.004 ±  0.422  ops/s
-DatabaseRequestBenchmark.withVirtualThread  thrpt   15  52.918 ±  0.398  ops/s
-MockBlockingBenchmark.withOSThread       thrpt   15  0.200 ±  0.001  ops/s
-MockBlockingBenchmark.withReactor        thrpt   15  0.999 ±  0.001  ops/s
-MockBlockingBenchmark.withVirtualThread  thrpt   15  0.999 ±  0.001  ops/s
-
-Benchmark                                        Mode  Cnt   Score   Error  Units
-HibernateRequestBenchmark.withCachedThreadPool  thrpt   15  31.133 ± 0.403  ops/s
-HibernateRequestBenchmark.withFixedThreadPool   thrpt   15  32.150 ± 0.198  ops/s
-HibernateRequestBenchmark.withVirtualThread     thrpt   15  35.408 ± 0.278  ops/s
+Benchmark                                     Mode  Cnt   Score    Error  Units
+DatabaseRequestBenchmark.withOSThread        thrpt   15  28.702 ±  1.612  ops/s
+DatabaseRequestBenchmark.withReactor         thrpt   15  61.575 ±  0.641  ops/s
+DatabaseRequestBenchmark.withVirtualThread   thrpt   15  51.491 ±  0.170  ops/s
+HibernateRequestBenchmark.withOSThread       thrpt   15  27.910 ±  0.211  ops/s
+HibernateRequestBenchmark.withVirtualThread  thrpt   15  45.975 ±  0.245  ops/s
+MockBlockingBenchmark.withOSThread           thrpt   15   0.200 ±  0.001  ops/s
+MockBlockingBenchmark.withReactor            thrpt   15   0.999 ±  0.001  ops/s
+MockBlockingBenchmark.withVirtualThread      thrpt   15   0.999 ±  0.001  ops/s

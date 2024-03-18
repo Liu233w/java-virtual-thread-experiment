@@ -10,7 +10,7 @@ jmh {
 
     jvmArgs.add("-Djava.util.logging.config.file=src/main/resources/logging.properties")
 
-    includes = listOf("HibernateRequestBenchmark")
+//    includes = listOf("HibernateRequestBenchmark")
 }
 
 group = "org.example"
