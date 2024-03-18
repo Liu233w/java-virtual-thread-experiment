@@ -1,9 +1,11 @@
+XPS 13 9310, i7-1195G7, 32GB RAM, Fedora 38, Amazon Corretto 21.0.2
+
 Benchmark                                     Mode  Cnt   Score    Error  Units
-DatabaseRequestBenchmark.withOSThread        thrpt   15  28.702 ±  1.612  ops/s
-DatabaseRequestBenchmark.withReactor         thrpt   15  61.575 ±  0.641  ops/s
-DatabaseRequestBenchmark.withVirtualThread   thrpt   15  51.491 ±  0.170  ops/s
-HibernateRequestBenchmark.withOSThread       thrpt   15  27.910 ±  0.211  ops/s
-HibernateRequestBenchmark.withVirtualThread  thrpt   15  45.975 ±  0.245  ops/s
+DatabaseRequestBenchmark.withOSThread        thrpt   15  29.441 ±  0.451  ops/s
+DatabaseRequestBenchmark.withReactor         thrpt   15  61.496 ±  1.033  ops/s
+DatabaseRequestBenchmark.withVirtualThread   thrpt   15  51.363 ±  0.269  ops/s
+HibernateRequestBenchmark.withOSThread       thrpt   15  28.007 ±  0.193  ops/s
+HibernateRequestBenchmark.withVirtualThread  thrpt   15  45.871 ±  0.466  ops/s
 MockBlockingBenchmark.withOSThread           thrpt   15   0.200 ±  0.001  ops/s
 MockBlockingBenchmark.withReactor            thrpt   15   0.999 ±  0.001  ops/s
 MockBlockingBenchmark.withVirtualThread      thrpt   15   0.999 ±  0.001  ops/s
