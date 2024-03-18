@@ -1,42 +1,42 @@
 package com.shuminliu.experiment.io_test;
 
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
-import reactor.core.publisher.Flux;
-import reactor.core.scheduler.Schedulers;
 
 import java.util.concurrent.Executors;
 
-public class DatabaseRequestBenchmark {
+@State(Scope.Benchmark)
+public class HibernateRequestBenchmark {
     private static final int COUNT = 1000;
     public static final int N_THREADS = 200;
+
+    @Setup(Level.Trial)
+    public void setUp() {
+        HibernateRequest.migrate();
+    }
 
     @Benchmark
     public void withFixedThreadPool(Blackhole blackhole) throws InterruptedException {
         try (var executor = Executors.newFixedThreadPool(N_THREADS)) {
-            DatabaseRequest.runOnExecutor(executor, COUNT, blackhole::consume);
+            HibernateRequest.runOnExecutor(executor, COUNT, blackhole::consume);
         }
     }
 
     @Benchmark
     public void withCachedThreadPool(Blackhole blackhole) throws InterruptedException {
         try (var executor = Executors.newCachedThreadPool()) {
-            DatabaseRequest.runOnExecutor(executor, COUNT, blackhole::consume);
+            HibernateRequest.runOnExecutor(executor, COUNT, blackhole::consume);
         }
     }
 
     @Benchmark
     public void withVirtualThread(Blackhole blackhole) throws InterruptedException {
         try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
-            DatabaseRequest.runOnExecutor(executor, COUNT, blackhole::consume);
+            HibernateRequest.runOnExecutor(executor, COUNT, blackhole::consume);
         }
-    }
-
-    @Benchmark
-    public void withReactor(Blackhole blackhole) throws InterruptedException {
-        Flux.range(1, COUNT)
-            .publishOn(Schedulers.boundedElastic())
-            .flatMap(i -> ReactorDatabaseRequest.handleRequest(blackhole::consume))
-            .blockLast();
     }
 }

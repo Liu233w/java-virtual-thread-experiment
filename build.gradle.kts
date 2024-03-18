@@ -7,6 +7,10 @@ jmh {
     iterations = 3
     warmupIterations = 1
     threads = 1
+
+    jvmArgs.add("-Djava.util.logging.config.file=src/main/resources/logging.properties")
+
+    includes = listOf("HibernateRequestBenchmark")
 }
 
 group = "org.example"
@@ -37,6 +41,10 @@ dependencies {
     implementation("io.r2dbc:r2dbc-spi:1.0.0.RELEASE")
     implementation("io.r2dbc:r2dbc-pool:1.0.1.RELEASE")
     implementation("org.postgresql:r2dbc-postgresql:1.0.4.RELEASE")
+
+    implementation("org.hibernate.orm:hibernate-core:6.4.4.Final")
+    implementation("org.hibernate.orm:hibernate-hikaricp:6.4.4.Final")
+    implementation("org.projectlombok:lombok:1.18.30")
 }
 
 tasks.withType<JavaCompile> {
