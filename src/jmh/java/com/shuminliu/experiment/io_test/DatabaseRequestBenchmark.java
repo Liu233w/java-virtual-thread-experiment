@@ -12,15 +12,8 @@ public class DatabaseRequestBenchmark {
     public static final int N_THREADS = 200;
 
     @Benchmark
-    public void withFixedThreadPool(Blackhole blackhole) throws InterruptedException {
+    public void withOSThread(Blackhole blackhole) throws InterruptedException {
         try (var executor = Executors.newFixedThreadPool(N_THREADS)) {
-            DatabaseRequest.runOnExecutor(executor, COUNT, blackhole::consume);
-        }
-    }
-
-    @Benchmark
-    public void withCachedThreadPool(Blackhole blackhole) throws InterruptedException {
-        try (var executor = Executors.newCachedThreadPool()) {
             DatabaseRequest.runOnExecutor(executor, COUNT, blackhole::consume);
         }
     }
