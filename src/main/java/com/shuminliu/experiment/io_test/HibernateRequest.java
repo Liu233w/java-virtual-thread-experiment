@@ -8,15 +8,16 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
+import java.util.logging.Logger;
 
 public class HibernateRequest implements Runnable {
     private final Consumer<Object> consumer;
-    private final SessionFactory sessionFactory;
 
-    public HibernateRequest(Consumer<Object> consumer, SessionFactory sessionFactory) {
+    public HibernateRequest(Consumer<Object> consumer) {
         this.consumer = consumer;
-        this.sessionFactory = sessionFactory;
     }
+
+    public static Logger logger = Logger.getLogger(HibernateRequest.class.getName());
 
     private static SessionFactory buildSessionFactory() {
         var configuration = new Configuration();
@@ -33,12 +34,14 @@ public class HibernateRequest implements Runnable {
         return configuration.buildSessionFactory();
     }
 
+    private static final SessionFactory sessionFactory = buildSessionFactory();
+
     public static void migrate() {
-        try (var factory = buildSessionFactory(); var session = factory.openSession()) {
+        try (var session = sessionFactory.openSession()) {
             var transaction = session.beginTransaction();
 
             int deleted = session.createMutationQuery("DELETE FROM DummyEntity").executeUpdate();
-            System.out.println("Deleted " + deleted + " entities");
+            logger.info("Deleted " + deleted + " entities");
 
             for (int i = 0; i < 10; i++) {
                 DummyEntity dummyEntity = new DummyEntity();
@@ -47,18 +50,18 @@ public class HibernateRequest implements Runnable {
             }
 
             transaction.commit();
-            System.out.println("Migrated");
+            logger.info("Migrated");
         }
     }
 
     public static void runOnExecutor(ExecutorService threadPool, long count, Consumer<Object> consumer) throws InterruptedException {
-        try (var factory = buildSessionFactory()) {
-            for (int i = 0; i < count; i++) {
-                threadPool.submit(new HibernateRequest(consumer, factory));
-            }
+        for (int i = 0; i < count; i++) {
+            threadPool.submit(new HibernateRequest(consumer));
+        }
 
-            threadPool.shutdown();
-            threadPool.awaitTermination(1, TimeUnit.DAYS);
+        threadPool.shutdown();
+        if (!threadPool.awaitTermination(1, TimeUnit.DAYS)) {
+            throw new RuntimeException("Timeout");
         }
     }
 
@@ -68,7 +71,7 @@ public class HibernateRequest implements Runnable {
             List<DummyEntity> entities = session.createSelectionQuery("FROM DummyEntity", DummyEntity.class).list();
             entities.forEach(consumer);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.severe(e.getMessage());
         }
     }
 }

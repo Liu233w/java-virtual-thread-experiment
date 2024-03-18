@@ -5,3 +5,8 @@ DatabaseRequestBenchmark.withVirtualThread  thrpt   15  52.918 ±  0.398  ops/s
 MockBlockingBenchmark.withOSThread       thrpt   15  0.200 ±  0.001  ops/s
 MockBlockingBenchmark.withReactor        thrpt   15  0.999 ±  0.001  ops/s
 MockBlockingBenchmark.withVirtualThread  thrpt   15  0.999 ±  0.001  ops/s
+
+Benchmark                                        Mode  Cnt   Score   Error  Units
+HibernateRequestBenchmark.withCachedThreadPool  thrpt   15  31.133 ± 0.403  ops/s
+HibernateRequestBenchmark.withFixedThreadPool   thrpt   15  32.150 ± 0.198  ops/s
+HibernateRequestBenchmark.withVirtualThread     thrpt   15  35.408 ± 0.278  ops/s

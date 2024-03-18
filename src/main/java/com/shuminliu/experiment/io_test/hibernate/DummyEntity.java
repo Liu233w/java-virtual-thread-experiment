@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "dummy")
+@Table(name = "dummy", schema = "public")
 public class DummyEntity {
     @Id
     @GeneratedValue
